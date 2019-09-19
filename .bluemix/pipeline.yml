@@ -16,7 +16,7 @@ stages:
     type: text 
   - name: SOME_BOOL_PROP
     value: ${SOME_BOOL_PROP}
-    type: boolean
+    type: text
   jobs:
   - name: Pre-build check
     type: builder
