@@ -13,7 +13,10 @@ stages:
     type: text
   - name: DOCKER_FILE
     value: Dockerfile
-    type: text  
+    type: text 
+  - name: SOME_BOOL_PROP
+    value: ${SOME_BOOL_PROP}
+    type: boolean
   jobs:
   - name: Pre-build check
     type: builder
