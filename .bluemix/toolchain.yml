@@ -49,6 +49,7 @@ services:
           PROD_REGION_ID: '{{form.pipeline.parameters.prod-region}}'
           PROD_CLUSTER_NAME: '{{form.pipeline.parameters.prod-cluster-name}}'
           PROD_CLUSTER_NAMESPACE: '{{form.pipeline.parameters.prod-cluster-namespace}}'
+          SOME_BOOL_PROP: '{{form.pipeline.parameters.some-bool-prop}}'
         execute: true
   webide:
     service_id: orion
