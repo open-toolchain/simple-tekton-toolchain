@@ -37,6 +37,7 @@ services:
       services:
         - repo
       name: '{{services.repo.parameters.repo_name}}'
+      type: tekton
       ui-pipeline: true
       configuration:
         content:
