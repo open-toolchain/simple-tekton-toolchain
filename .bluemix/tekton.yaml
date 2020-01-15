@@ -1,0 +1,38 @@
+---
+inputs:
+- type: git
+  branch: master
+  service: ${SAMPLE_REPO}
+  path: .tekton
+triggers:
+- type: git
+  name: Trigger
+  service: ${SAMPLE_REPO}
+  branch: master
+  events: {"push":true,"pull_request":true,"pull_request_closed":false}
+  eventListener: listener
+properties:
+- name: apikey
+  value: ${API_KEY}
+  type: SECURE
+- name: cluster
+  value: ${CLUSTER}
+  type: text 
+- name: registryNamespace
+  value: ${REGISTRY_NAMESPACE}
+  type: text 
+- name: clusterNamespace
+  value: ${CLUSTER_NAMESPACE}
+  type: text
+- name: clusterRegion
+  value: ${CLUSTER_REGION}
+  type: text
+- name: registryRegion
+  value: ${REGISTRY_REGION}
+  type: text
+- name: repository
+  value: ${REPOSITORY}
+  type: text
+- name: revision
+  value: ${REVISION}
+  type: text
