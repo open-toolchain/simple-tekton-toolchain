@@ -27,6 +27,7 @@ services:
     parameters:
       repo_name: '{toolchain.name}}'
       repo_url: 'https://github.com/Jaorji/hello-tekton'
+      branch: master
       type: link
       has_issues: false
       enable_traceability: true
@@ -49,6 +50,8 @@ services:
           PROD_REGION_ID: '{{form.pipeline.parameters.prod-region}}'
           PROD_CLUSTER_NAME: '{{form.pipeline.parameters.prod-cluster-name}}'
           PROD_CLUSTER_NAMESPACE: '{{form.pipeline.parameters.prod-cluster-namespace}}'
+          REPOSITORY: '{{services.repo.parameters.repo_url}}'
+          REVISION: '{{services.repo.parameters.branch}}'
         execute: true
   webide:
     service_id: orion
