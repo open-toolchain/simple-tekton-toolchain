@@ -62,10 +62,6 @@
         "type": "string",
         "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
       },
-     "some-bool-prop": {
-            "description": "Some boolean property description",
-            "type": "boolean"
-        },
      "app-name": {
           "description": {
             "$ref": "#/messages/deploy.appDescription"
@@ -80,12 +76,6 @@
         "type": "validator",
         "url": "/devops/setup/bm-helper/custom_helper.html"
      },
-    {
-            "type": "boolean",
-            "key": "some-bool-prop",
-            "readonly": false,
-            "title": "Some boolean property"
-        },
     {
         "type": "text",
         "readonly": false,
