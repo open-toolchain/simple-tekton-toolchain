@@ -13,21 +13,21 @@ template:
     - repo
   info:
     git url: >-
-      [https://github.com/open-toolchain/simple-helm-toolchain](https://github.com/open-toolchain/simple-helm-toolchain)
+      [https://github.com/open-toolchain/simple-tekton-toolchain](https://github.com/open-toolchain/simple-tekton-toolchain)
     git branch: >-
-      [master](https://github.com/open-toolchain/simple-helm-toolchain/tree/master)
+      [master](https://github.com/open-toolchain/simple-tekton-toolchain/tree/master)
 toolchain:
-  name: 'kube-toolchain-{{timestamp}}'
+  name: 'simple-tekton-toolchain-{{timestamp}}'
   template:
     getting_started:
       $ref: "#/messages/template.gettingStarted" 
 services:
   repo:
-    service_id: hostedgit
+    service_id: githubpublic
     parameters:
-      repo_name: 'hello-containers-{{timestamp}}'
-      repo_url: 'https://github.com/open-toolchain/hello-containers'
-      type: clone
+      repo_name: '{toolchain.name}}'
+      repo_url: 'https://github.com/Jaorji/hello-tekton'
+      type: link
       has_issues: false
       enable_traceability: true
   build:
@@ -39,7 +39,7 @@ services:
       ui-pipeline: true
       configuration:
         content:
-          $text: pipeline.yml
+          $text: tekton.yml
         env:
           GIT_REPO: repo
           CF_APP_NAME: '{{form.pipeline.parameters.app-name}}'
@@ -49,7 +49,6 @@ services:
           PROD_REGION_ID: '{{form.pipeline.parameters.prod-region}}'
           PROD_CLUSTER_NAME: '{{form.pipeline.parameters.prod-cluster-name}}'
           PROD_CLUSTER_NAMESPACE: '{{form.pipeline.parameters.prod-cluster-namespace}}'
-          SOME_BOOL_PROP: '{{form.pipeline.parameters.some-bool-prop}}'
         execute: true
   webide:
     service_id: orion
