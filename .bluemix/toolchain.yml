@@ -27,7 +27,7 @@ services:
     parameters:
       repo_name: '{{toolchain.name}}'
       repo_url: 'https://github.com/open-toolchain/hello-tekton'
-      type: clone
+      type: fork
       has_issues: false
       enable_traceability: true
   build:
