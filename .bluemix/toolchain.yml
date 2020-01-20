@@ -12,10 +12,13 @@ template:
     - build
     - repo
   info:
-    git url: >-
-      [https://github.com/open-toolchain/simple-tekton-toolchain](https://github.com/open-toolchain/simple-tekton-toolchain)
-    git branch: >-
-      [master](https://github.com/open-toolchain/simple-tekton-toolchain/tree/master)
+    git url: >
+      "[" + $env.repository + "]" +
+        "(" + $env.repository + ")"
+    git branch: >
+      "[" + $env.branch + "]" +
+        "(" + $env.repository +
+          "/tree/" + $env.branch + ")"
 toolchain:
   name: 'simple-tekton-toolchain-{{timestamp}}'
   template:
@@ -26,8 +29,8 @@ services:
     service_id: githubpublic
     parameters:
       repo_name: '{{toolchain.name}}'
-      repo_url: 'https://github.com/open-toolchain/hello-tekton'
-      type: fork
+      source_repo_url: 'https://github.com/open-toolchain/hello-tekton'
+      type: clone
       has_issues: false
       enable_traceability: true
   build:
@@ -50,7 +53,7 @@ services:
           PROD_REGION_ID: '{{form.pipeline.parameters.prod-region}}'
           PROD_CLUSTER_NAME: '{{form.pipeline.parameters.prod-cluster-name}}'
           PROD_CLUSTER_NAMESPACE: '{{form.pipeline.parameters.prod-cluster-namespace}}'
-          REPOSITORY: '{{services.repo.parameters.repo_url}}'
+          REPOSITORY: '{{services.repo.parameters.source_repo_url}}'
           REVISION: master
         execute: true
   webide:
