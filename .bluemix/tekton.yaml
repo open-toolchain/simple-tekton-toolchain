@@ -13,7 +13,7 @@ triggers:
   eventListener: listener
 - type: manual
   name: Manual Trigger
-  eventListener: maunallistener
+  eventListener: listener
 properties:
 - name: apikey
   value: ${API_KEY}
