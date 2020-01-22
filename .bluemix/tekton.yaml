@@ -28,10 +28,10 @@ properties:
   value: ${PROD_CLUSTER_NAMESPACE}
   type: text
 - name: clusterRegion
-  value: us-south
+  value: ${PROD_CLUSTER_REGION}
   type: text
 - name: registryRegion
-  value: us-south
+  value: ${REGISTRY_REGION}
   type: text
 - name: repository
   value: ${REPOSITORY}
