@@ -2,12 +2,12 @@
 inputs:
 - type: git
   branch: master
-  service: ${GIT_REPO}
+  service: ${DEFINITION_REPO}
   path: .tekton
 triggers:
 - type: git
   name: Git PR Trigger
-  service: ${GIT_REPO}
+  service: ${APPLICATION_REPO}
   branch: master
   events: {"push":true,"pull_request":true,"pull_request_closed":false}
   eventListener: listener

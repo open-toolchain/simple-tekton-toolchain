@@ -10,7 +10,8 @@ template:
   icon: secure-lock-kubernetes.svg
   required:
     - build
-    - repo
+    - tekton-definition-repo
+    - application-repo
   info:
     git url: >
       "[" + $env.repository + "]" +
@@ -20,24 +21,31 @@ template:
         "(" + $env.repository +
           "/tree/" + $env.branch + ")"
 toolchain:
-  name: 'simple-tekton-toolchain-{{timestamp}}'
+  name: 'tekton-toolchain-compliance-{{timestamp}}'
   template:
     getting_started:
       $ref: "#/messages/template.gettingStarted" 
 services:
-  repo:
-    service_id: githubpublic
+  tekton-definition-repo:
+    service_id: github
     parameters:
-      repo_name: '{{toolchain.name}}'
-      source_repo_url: 'https://github.com/open-toolchain/hello-tekton'
-      type: clone
+      source_repo_url: 'https://github.ibm.com/cocoa/tekton-poc-pipeline'
+      type: link
+      has_issues: false
+      enable_traceability: true
+  application-repo:   
+    service_id: github  
+    parameters:
+      source_repo_url: 'https://github.ibm.com/cocoa/cocoa-example-app'
+      type: link
       has_issues: false
       enable_traceability: true
   build:
     service_id: pipeline
     parameters:
       services:
-        - repo
+        - tekton-definition-repo
+        - application-repo
       name: '{{services.repo.parameters.repo_name}}'
       type: tekton
       ui-pipeline: true
@@ -45,7 +53,8 @@ services:
         content:
           $text: tekton.yaml
         env:
-          GIT_REPO: repo
+          DEFINITION_REPO: tekton-definition-repo
+          APPLICATION_REPO: tekton-definition-repo
           CF_APP_NAME: '{{form.pipeline.parameters.app-name}}'
           REGISTRY_REGION_ID: '{{form.pipeline.parameters.registry-region}}'
           REGISTRY_NAMESPACE: '{{form.pipeline.parameters.registry-namespace}}'
@@ -56,8 +65,6 @@ services:
           REPOSITORY: '{{services.repo.parameters.source_repo_url}}'
           REVISION: master
         execute: true
-  webide:
-    service_id: orion
 form:
   pipeline:
     parameters:
