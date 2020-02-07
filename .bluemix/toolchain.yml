@@ -29,7 +29,17 @@ services:
     service_id: githubpublic
     parameters:
       repo_name: '{{toolchain.name}}'
+      #source_repo_url: 'https://github.com/open-toolchain/hello-tekton'
+      repo_url: 'https://github.com/proc-org/simple-tekton-toolchain'
+      type: link
+      has_issues: false
+      enable_traceability: true
+  repo1:
+    service_id: githubpublic
+    parameters:
+      repo_name: '{{toolchain.name}}'
       source_repo_url: 'https://github.com/open-toolchain/hello-tekton'
+      #repo_url: 'https://github.com/proc-org/simple-tekton-toolchain'
       type: clone
       has_issues: false
       enable_traceability: true
@@ -37,7 +47,7 @@ services:
     service_id: pipeline
     parameters:
       services:
-        - repo
+        - repo1
       name: '{{services.repo.parameters.repo_name}}'
       type: tekton
       ui-pipeline: true
@@ -45,7 +55,7 @@ services:
         content:
           $text: tekton.yaml
         env:
-          GIT_REPO: repo
+          GIT_REPO: repo1
           CF_APP_NAME: '{{form.pipeline.parameters.app-name}}'
           REGISTRY_REGION_ID: '{{form.pipeline.parameters.registry-region}}'
           REGISTRY_NAMESPACE: '{{form.pipeline.parameters.registry-namespace}}'
