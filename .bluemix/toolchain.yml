@@ -32,7 +32,7 @@ services:
       repo_url: 'https://github.com/open-toolchain/hello-containers'
       type: link
       has_issues: false
-      enable_traceability: true
+      enable_traceability: false
   repo1:
     service_id: githubpublic
     parameters:
