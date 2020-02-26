@@ -31,7 +31,7 @@ services:
       repo_name: '{{toolchain.name}}'
       source_repo_url: 'https://github.com/open-toolchain/hello-tekton'
       type: clone
-      has_issues: false
+      has_issues: true
       enable_traceability: true
   build:
     service_id: pipeline
