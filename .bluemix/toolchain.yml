@@ -11,7 +11,6 @@ template:
   required:
     - build
     - repo
-    - artInteg
   info:
     git url: >
       "[" + $env.repository + "]" +
@@ -26,30 +25,19 @@ toolchain:
     getting_started:
       $ref: "#/messages/template.gettingStarted" 
 services:
-  artInteg:
-    service_id: artifactory
   repo:
     service_id: githubpublic
     parameters:
       repo_name: '{{toolchain.name}}'
-      repo_url: 'https://github.com/open-toolchain/hello-containers'
-      type: link
-      has_issues: false
-      enable_traceability: false
-  repo1:
-    service_id: githubpublic
-    parameters:
-      repo_name: '{{toolchain.name}}'
       source_repo_url: 'https://github.com/open-toolchain/hello-tekton'
-      #repo_url: 'https://github.com/proc-org/simple-tekton-toolchain'
       type: clone
-      has_issues: false
+      has_issues: true
       enable_traceability: true
   build:
     service_id: pipeline
     parameters:
       services:
-        - repo1
+        - repo
       name: '{{services.repo.parameters.repo_name}}'
       type: tekton
       ui-pipeline: true
@@ -57,7 +45,7 @@ services:
         content:
           $text: tekton.yaml
         env:
-          GIT_REPO: repo1
+          GIT_REPO: repo
           CF_APP_NAME: '{{form.pipeline.parameters.app-name}}'
           REGISTRY_REGION_ID: '{{form.pipeline.parameters.registry-region}}'
           REGISTRY_NAMESPACE: '{{form.pipeline.parameters.registry-namespace}}'
@@ -66,7 +54,6 @@ services:
           PROD_CLUSTER_NAME: '{{form.pipeline.parameters.prod-cluster-name}}'
           PROD_CLUSTER_NAMESPACE: '{{form.pipeline.parameters.prod-cluster-namespace}}'
           REPOSITORY: '{{services.repo.parameters.source_repo_url}}'
-          ARTIFACTORY_TOKEN: '{{services.artInteg.parameters.docker_config_json}}'
           REVISION: master
         execute: true
   webide:
