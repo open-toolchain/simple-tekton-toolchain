@@ -11,6 +11,7 @@ template:
   required:
     - build
     - repo
+    - artInteg
   info:
     git url: >
       "[" + $env.repository + "]" +
@@ -25,6 +26,8 @@ toolchain:
     getting_started:
       $ref: "#/messages/template.gettingStarted" 
 services:
+  artInteg:
+    service_id: artifactory
   repo:
     service_id: githubpublic
     parameters:
@@ -63,6 +66,7 @@ services:
           PROD_CLUSTER_NAME: '{{form.pipeline.parameters.prod-cluster-name}}'
           PROD_CLUSTER_NAMESPACE: '{{form.pipeline.parameters.prod-cluster-namespace}}'
           REPOSITORY: '{{services.repo.parameters.source_repo_url}}'
+          ARTIFACTORY_TOKEN: '{{services.artInteg.parameters.docker_config_json}}'
           REVISION: master
         execute: true
   webide:
