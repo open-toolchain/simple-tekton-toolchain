@@ -39,3 +39,6 @@ properties:
 - name: revision
   value: ${REVISION}
   type: text
+- name: ARTIFACTORY_TOKEN
+  value: ${ARTIFACTORY_TOKEN}
+  type: text
