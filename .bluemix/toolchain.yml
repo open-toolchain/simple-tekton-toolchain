@@ -11,6 +11,7 @@ template:
   required:
     - build
     - repo
+    - artInteg
   info:
     git url: >
       "[" + $env.repository + "]" +
@@ -25,6 +26,8 @@ toolchain:
     getting_started:
       $ref: "#/messages/template.gettingStarted" 
 services:
+  artInteg:
+    service_id: artifactory
   repo:
     service_id: githubpublic
     parameters:
