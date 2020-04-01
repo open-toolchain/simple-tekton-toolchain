@@ -28,6 +28,8 @@ toolchain:
 services:
   kpvault:
     service_id: keyprotect
+    parameters:
+      name: 'keyprotect-{{toolchain.name}}'
   repo:
     service_id: githubpublic
     parameters:
