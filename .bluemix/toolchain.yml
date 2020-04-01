@@ -11,6 +11,7 @@ template:
   required:
     - build
     - repo
+    - kpvault
   info:
     git url: >
       "[" + $env.repository + "]" +
