@@ -25,6 +25,8 @@ toolchain:
     getting_started:
       $ref: "#/messages/template.gettingStarted" 
 services:
+  kpvault:
+    service_id: keyprotect
   repo:
     service_id: githubpublic
     parameters:
