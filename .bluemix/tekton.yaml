@@ -39,3 +39,6 @@ properties:
 - name: revision
   value: ${REVISION}
   type: text
+- name: REGION
+  value: 'ibm:yp:us-south'
+  type: text
