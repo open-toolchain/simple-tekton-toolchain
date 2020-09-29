@@ -55,7 +55,7 @@ services:
           PROD_CLUSTER_NAMESPACE: '{{form.pipeline.parameters.prod-cluster-namespace}}'
           REPOSITORY: '{{services.repo.parameters.source_repo_url}}'
           REVISION: master
-        execute: true
+        execute: Manual Trigger
   webide:
     service_id: orion
 form:
